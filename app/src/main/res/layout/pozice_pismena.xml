@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fffff1a4">
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true">
+
+        <TableRow>
+            <Space android:layout_span="3"
+                android:minHeight="50dp" />
+        </TableRow>
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <ImageButton
+                android:id="@+id/imgKonec"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:layout_margin="0dip"
+                android:layout_weight="1"
+                android:background="@drawable/vlak_konec"
+                android:onClick="imgKonecClicked"/>
+
+            <ImageButton
+                android:id="@+id/imgStred"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:layout_margin="0dip"
+                android:layout_weight="1"
+                android:background="@drawable/vlak_stred"
+                android:onClick="imgStredClicked"/>
+
+            <ImageButton
+                android:id="@+id/imgZacatek"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:padding="10dip"
+                android:layout_margin="0dip"
+                android:layout_weight="1"
+                android:background="@drawable/vlak_zacatek"
+                android:onClick="imgZacatekClicked" />
+
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView android:id="@+id/imgOdpovedAno"
+            android:src="@drawable/odpoved_ano2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+
+        <ImageView android:id="@+id/imgOdpovedNe"
+            android:src="@drawable/odpoved_ne2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            />
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <TableRow
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+
+            <Space android:minWidth="20dp" />
+
+            <EditText android:id="@+id/hadaneSlovo"
+                android:layout_width="150dp"
+                android:background="#7cfff1a4"
+                android:textSize="15dp" />
+
+            <Button android:text="@string/btn_jine"
+                android:onClick="btnJineClicked"/>
+
+            <Space android:minWidth="20dp" />
+
+            <TextView android:text="@string/text_zkousene"
+                android:textSize="17dp" />
+
+            <Space android:minWidth="5dp" />
+
+            <EditText android:id="@+id/zkousenePismeno"
+                android:maxLength="1" android:layout_width="15dp"
+                android:background="#fffff1a4"/>
+
+            <Space android:minWidth="20dp" />
+
+
+        </TableRow>
+
+        <TableRow>
+            <Space android:layout_span="6"
+                android:minHeight="20dp" />
+        </TableRow>
+    </TableLayout>
+
+</RelativeLayout>

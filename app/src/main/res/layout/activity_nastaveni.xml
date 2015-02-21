@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp">
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Vytvořit slovník ze slov:"/>
+    <ScrollView
+        android:id="@+id/ScrollView02"
+        android:layout_height="750px"
+        android:layout_width="fill_parent">
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/slovnik"
+            android:text="jedna\ndva\ntri\nctyri\nkakao\nkava"
+            />
+
+    </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vytvoření slovníku z textu"
+        android:onClick="btnVytvoreniSlovnikuClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vytvoření slovníku z interní databáze"
+        android:onClick="btnVytvoreniSlovnikuInterniClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vyčistit text slovníku"
+        android:onClick="btnVycistitTextSlovnikuClicked"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Začít nové zkoušení slov"
+        android:onClick="btnZacitNoveZkouseniClicked"/>
+    <CheckBox
+        android:id="@+id/chkGenerovatNahodne"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Slovo generovat náhodně"
+        android:onClick="chkGenerovatNahodneChecked"/>
+
+</LinearLayout>
