@@ -24,10 +24,10 @@ public class NastaveniActivity extends Activity {
     public static final String GENEROVAT_NAHODNE_KEY = "generovatNahodneKey";
     SharedPreferences sharedpreferences;
     CheckBox generovatNahodne;
+    Context ctx = (Context) this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Context ctx = (Context) this;
         super.onCreate(savedInstanceState);
 
         //Remove title bar
@@ -56,8 +56,6 @@ public class NastaveniActivity extends Activity {
     }
 
     public void btnVytvoreniSlovnikuClicked(View obj) {
-        Context ctx = (Context) this;
-
         if (txtSlovnik.getText().length() > 0){
             SlovnikDao dao = new SlovnikDao(ctx);
 
@@ -75,7 +73,6 @@ public class NastaveniActivity extends Activity {
     }
 
     public void btnVytvoreniSlovnikuInterniClicked(View obj) {
-        Context ctx = (Context)this;
         SlovnikDao dao = new SlovnikDao(ctx);
 
         dao.smazSlova();
@@ -109,12 +106,11 @@ public class NastaveniActivity extends Activity {
         editor.commit();
 
         SlovnikDao.poradiSlova = 0; //začnu vždy od začátku
-        PozicePismena.pouzitaSlova = new HashSet<String>();
+        PozicePismena.pouzitaSlova = new HashSet<>();
     }
 
     public void btnZacitNoveZkouseniClicked(View obj) {
-        Context ctx = (Context)this;
-        PozicePismena.pouzitaSlova = new HashSet<String>();
+        PozicePismena.pouzitaSlova = new HashSet<>();
         SlovnikDao.poradiSlova = 0;
 
         Toast.makeText(ctx, "Je možné začít nové zkoušení slov.", Toast.LENGTH_SHORT).show();
