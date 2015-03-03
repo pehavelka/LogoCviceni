@@ -60,6 +60,7 @@ public class PozicePismena extends Activity {
         dao.inicializaceKurzoruSlov();
 
         //keš odpovědí
+        mapObrazekAno.put(1, R.drawable.odpoved_ano1);
         mapObrazekAno.put(2, R.drawable.odpoved_ano2);
         mapObrazekAno.put(3, R.drawable.odpoved_ano3);
         mapObrazekAno.put(4, R.drawable.odpoved_ano4);
