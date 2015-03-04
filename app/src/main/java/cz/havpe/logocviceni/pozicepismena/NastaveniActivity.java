@@ -22,6 +22,8 @@ public class NastaveniActivity extends Activity {
 
     public static final String MY_PREFERENCES = "MyPrefs" ;
     public static final String GENEROVAT_NAHODNE_KEY = "generovatNahodneKey";
+    public static final String ZKOUSENE_PISMENO_KEY = "zkousenePismenoKey";
+
     SharedPreferences sharedpreferences;
     CheckBox generovatNahodne;
     Context ctx = (Context) this;

@@ -50,7 +50,7 @@ public class SlovnikDao {
     public void smazSlova() {
         SQLiteDatabase db = openHelper.getWritableDatabase();
 
-        long id = db.delete("slova", null, null);
+        db.delete("slova", null, null);
         db.close();
     }
     public long vlozSlovo(String aSlovo) {
@@ -73,7 +73,7 @@ public class SlovnikDao {
         curSlova.moveToFirst();
 
         do  {
-            if (pocet == nahoda) {
+            if (pocet.equals(nahoda)) {
                 slovo = curSlova.getString(0);
             }
             pocet++;
@@ -89,7 +89,7 @@ public class SlovnikDao {
         curSlova.moveToFirst();
 
         do {
-            if (pocet == poradiSlova) {
+            if (pocet.equals(poradiSlova)) {
                 slovo = curSlova.getString(0);
             }
             pocet++;
@@ -99,7 +99,7 @@ public class SlovnikDao {
 
         if (poradiSlova > pocetSlov) {
             poradiSlova = 0;
-            PozicePismena.pouzitaSlova = new HashSet<String>();
+            PozicePismena.pouzitaSlova = new HashSet<>();
         }
         return slovo;
     }
@@ -146,6 +146,6 @@ public class SlovnikDao {
         curSlova= db.query("slova", columns, null, null, null, null, null);
 
         poradiSlova = 0;
-        PozicePismena.pouzitaSlova = new HashSet<String>();
+        PozicePismena.pouzitaSlova = new HashSet<>();
     }
 }

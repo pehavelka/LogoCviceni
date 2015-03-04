@@ -43,7 +43,7 @@ public class Utils {
 
             BufferedReader input =  new BufferedReader(new InputStreamReader(is), 1024*8);
             try {
-                String line = null;
+                String line;
                 while (( line = input.readLine()) != null){
                     contents.append(line);
                     contents.append(sep);

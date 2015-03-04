@@ -88,13 +88,16 @@
 
             <Space android:minWidth="20dp" />
 
-            <EditText android:id="@+id/hadaneSlovo"
+            <TextView android:id="@+id/hadaneSlovo"
                 android:layout_width="150dp"
                 android:background="#7cfff1a4"
-                android:textSize="15dp" />
+                android:textSize="15dp"
+                android:autoLink="all" />
 
-            <Button android:text="@string/btn_jine"
-                android:onClick="btnJineClicked"/>
+            <Button android:id="@+id/btnJine"
+                android:text="@string/btn_jine"
+                android:onClick="btnJineClicked"
+                android:focusableInTouchMode="true"/>
 
             <Space android:minWidth="20dp" />
 

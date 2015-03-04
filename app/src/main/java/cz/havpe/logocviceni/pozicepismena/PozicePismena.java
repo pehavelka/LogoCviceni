@@ -2,15 +2,16 @@ package cz.havpe.logocviceni.pozicepismena;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.HashMap;
@@ -27,14 +28,15 @@ public class PozicePismena extends Activity {
     int pocetObrazku = 0;
     ImageView imgAno;
     ImageView imgNe;
-    EditText txtHadaneSlovo;
+    TextView txtHadaneSlovo;
     EditText txtZkousenePismeno;
+    Button btnJine;
 
     SharedPreferences sharedpreferences;
 
-    public static Set<String> pouzitaSlova = new HashSet<String>();
-    Map<Integer, Integer> mapObrazekAno = new HashMap<Integer, Integer>();
-    Map<Integer, Integer> mapObrazekNe = new HashMap<Integer, Integer>();
+    public static Set<String> pouzitaSlova = new HashSet<>();
+    Map<Integer, Integer> mapObrazekAno = new HashMap<>();
+    Map<Integer, Integer> mapObrazekNe = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +53,11 @@ public class PozicePismena extends Activity {
 
         imgAno = (ImageView) findViewById(R.id.imgOdpovedAno);
         imgNe = (ImageView) findViewById(R.id.imgOdpovedNe);
-        txtHadaneSlovo = (EditText)findViewById(R.id.hadaneSlovo);
+        txtHadaneSlovo = (TextView)findViewById(R.id.hadaneSlovo);
         txtZkousenePismeno = (EditText)findViewById(R.id.zkousenePismeno);
+        btnJine = (Button)findViewById(R.id.btnJine);
 
-        //příprava keše slovníku
-        Context ctx = (Context)this;
-        SlovnikDao dao = new SlovnikDao(ctx);
+        SlovnikDao dao = new SlovnikDao(this);
         dao.inicializaceKurzoruSlov();
 
         //keš odpovědí
@@ -73,6 +74,13 @@ public class PozicePismena extends Activity {
         mapObrazekNe.put(5, R.drawable.odpoved_ne5);
 
         pocetObrazku = mapObrazekAno.size();
+
+        if (sharedpreferences.contains(NastaveniActivity.ZKOUSENE_PISMENO_KEY))
+        {
+            txtZkousenePismeno.setText(sharedpreferences.getString(NastaveniActivity.ZKOUSENE_PISMENO_KEY, null));
+        }
+
+        btnJine.requestFocus();
     }
 
     public void imgZacatekClicked(View obj) {
@@ -87,15 +95,15 @@ public class PozicePismena extends Activity {
         _vyhodnotSlovo(VyskytPismena.KONEC);
     }
 
-    public void btnNastaveniClicked(View obj) {
-        Intent intent = new Intent(this, NastaveniActivity.class);
-        startActivity(intent);
-    }
-
     public void btnJineClicked(View obj) {
+
         _schovejOdpovedi();
 
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
+
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(NastaveniActivity.ZKOUSENE_PISMENO_KEY, zkousenePismeno);
+        editor.commit();
 
         if (zkousenePismeno.length() == 0) {
             Toast.makeText(this,
@@ -107,9 +115,8 @@ public class PozicePismena extends Activity {
         Integer pocet = 0;
         Boolean generovatNahodne = false;
 
-        Context ctx = (Context)this;
-        SlovnikDao dao = new SlovnikDao(ctx);
-        String nahodneSlovo = "";
+        SlovnikDao dao = new SlovnikDao(this);
+        String nahodneSlovo;
 
         if (sharedpreferences.contains(NastaveniActivity.GENEROVAT_NAHODNE_KEY))
         {
@@ -145,7 +152,7 @@ public class PozicePismena extends Activity {
 
             //ošetření proti zacyklení
             if (pocet == POCET_POKUSU
-                || nahodneSlovo.indexOf(zkousenePismeno) > -1) {
+                || nahodneSlovo.contains(zkousenePismeno)) {
                 hledat = false;
 
                 if (pocet == POCET_POKUSU) {
@@ -166,7 +173,6 @@ public class PozicePismena extends Activity {
     private void _vyhodnotSlovo(VyskytPismena aVyskytPismena) {
         _schovejOdpovedi();
 
-        Integer nah = Utils.randInt(1, 5);
 
         MediaPlayer player;
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
@@ -215,8 +221,6 @@ public class PozicePismena extends Activity {
                 nalezenaPozice = VyskytPismena.STRED;
             }
         }
-
-        Context ctx = (Context)this;
 
         Integer nahodaObrazek = Utils.randInt(1, pocetObrazku);
 
