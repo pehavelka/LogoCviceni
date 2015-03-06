@@ -24,6 +24,7 @@ import cz.havpe.logocviceni.R;
 
 public class PozicePismena extends Activity {
 
+    MediaPlayer player = new MediaPlayer();
     final int POCET_POKUSU = 1000;
     int pocetObrazku = 0;
     ImageView imgAno;
@@ -31,6 +32,9 @@ public class PozicePismena extends Activity {
     TextView txtHadaneSlovo;
     EditText txtZkousenePismeno;
     Button btnJine;
+    ImageView imgZacatek;
+    ImageView imgKonec;
+    ImageView imgStred;
 
     SharedPreferences sharedpreferences;
 
@@ -56,6 +60,9 @@ public class PozicePismena extends Activity {
         txtHadaneSlovo = (TextView)findViewById(R.id.hadaneSlovo);
         txtZkousenePismeno = (EditText)findViewById(R.id.zkousenePismeno);
         btnJine = (Button)findViewById(R.id.btnJine);
+        imgZacatek = (ImageView) findViewById(R.id.imgZacatek);
+        imgKonec = (ImageView) findViewById(R.id.imgKonec);
+        imgStred = (ImageView) findViewById(R.id.imgStred);
 
         SlovnikDao dao = new SlovnikDao(this);
         dao.inicializaceKurzoruSlov();
@@ -167,6 +174,7 @@ public class PozicePismena extends Activity {
 
         pouzitaSlova.add(nahodneSlovo);
         txtHadaneSlovo.setText(nahodneSlovo);
+        _nastavMoznostKlikani(true);
         dao.close();
     }
 
@@ -174,7 +182,7 @@ public class PozicePismena extends Activity {
         _schovejOdpovedi();
 
 
-        MediaPlayer player;
+
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
         if (zkousenePismeno.trim().length() ==0) {
             Toast.makeText(this,
@@ -224,6 +232,13 @@ public class PozicePismena extends Activity {
 
         Integer nahodaObrazek = Utils.randInt(1, pocetObrazku);
 
+        _nastavMoznostKlikani(false);
+
+        if (player.isPlaying()) {
+            player.stop();
+            player.release();
+        }
+
         if (nalezenaPozice.equals(aVyskytPismena)) {
             player = MediaPlayer.create(this,  R.raw.zvuk_spravne);
             player.start();
@@ -238,11 +253,28 @@ public class PozicePismena extends Activity {
 
             imgNe.setImageResource(mapObrazekNe.get(nahodaObrazek));
         }
+
+        //listenery
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        {
+            @Override
+            public void onCompletion(MediaPlayer mp)
+            {
+                _schovejOdpovedi();
+                txtHadaneSlovo.setText("");
+            }
+        });
     }
 
     private void _schovejOdpovedi() {
         imgAno.setVisibility(View.INVISIBLE);
         imgNe.setVisibility(View.INVISIBLE);
+    }
+
+    private void _nastavMoznostKlikani(Boolean aKlikat) {
+        imgZacatek.setClickable(aKlikat);
+        imgKonec.setClickable(aKlikat);
+        imgStred.setClickable(aKlikat);
     }
 
 }
