@@ -260,7 +260,6 @@ public class PozicePismena extends Activity {
             @Override
             public void onCompletion(MediaPlayer mp)
             {
-                _schovejOdpovedi();
                 txtHadaneSlovo.setText("");
             }
         });
