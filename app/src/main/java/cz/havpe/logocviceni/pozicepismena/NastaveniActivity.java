@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashSet;
 
 import cz.havpe.logocviceni.R;
@@ -27,6 +33,7 @@ public class NastaveniActivity extends Activity {
     SharedPreferences sharedpreferences;
     CheckBox generovatNahodne;
     Context ctx = (Context) this;
+    Button btnSlovnkSDkarta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class NastaveniActivity extends Activity {
         String slova = dao.nactiVsechnaSlova();
 
         txtSlovnik = ((EditText)findViewById(R.id.slovnik));
+        btnSlovnkSDkarta = (Button) findViewById(R.id.slovnkSDkarta);
 
         txtSlovnik.setText(slova);
         generovatNahodne = (CheckBox) findViewById(R.id.chkGenerovatNahodne);
@@ -55,6 +63,15 @@ public class NastaveniActivity extends Activity {
         {
             generovatNahodne.setChecked(sharedpreferences.getBoolean(GENEROVAT_NAHODNE_KEY, false));
         }
+
+        btnSlovnkSDkarta.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    _importujSlovnk();
+                                                }
+                                            }
+
+        );
     }
 
     public void btnVytvoreniSlovnikuClicked(View obj) {
@@ -74,24 +91,6 @@ public class NastaveniActivity extends Activity {
         }
     }
 
-    public void btnVytvoreniSlovnikuInterniClicked(View obj) {
-        SlovnikDao dao = new SlovnikDao(ctx);
-
-        dao.smazSlova();
-
-        String slovnik = Utils.readStringFromResource(ctx, R.raw.slovnik_maly);
-        String[] slova = slovnik.split("\\n");
-        _vlozSlova(dao, slova);
-        dao.inicializaceKurzoruSlov();
-        //dao.close();
-
-        String slova2 = dao.nactiVsechnaSlova();
-        txtSlovnik.setText(slova2);
-
-
-        Toast.makeText(ctx, "Slovník byl vytvořen z interní databáze.", Toast.LENGTH_SHORT).show();
-    }
-
     private void _vlozSlova(SlovnikDao aDao, String[] aSlova) {
         for (String slovo:aSlova) {
             aDao.vlozSlovo(slovo);
@@ -105,7 +104,8 @@ public class NastaveniActivity extends Activity {
     public void chkGenerovatNahodneChecked(View obj){
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putBoolean(GENEROVAT_NAHODNE_KEY,generovatNahodne.isChecked());
-        editor.commit();
+        //editor.commit();
+        editor.apply();
 
         SlovnikDao.poradiSlova = 0; //začnu vždy od začátku
         PozicePismenaActivity.pouzitaSlova = new HashSet<>();
@@ -116,5 +116,39 @@ public class NastaveniActivity extends Activity {
         SlovnikDao.poradiSlova = 0;
 
         Toast.makeText(ctx, "Je možné začít nové zkoušení slov.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void _importujSlovnk() {
+
+        File file = Environment.getExternalStorageDirectory();
+        File textFile = new File(file + File.separator +  "LogoCviceni" + File.separator + "UrceniPismena" + File.separator + "UrceniPismena.txt");
+
+        StringBuilder slova2 = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(textFile));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                slova2.append(line);
+                slova2.append('\n');
+            }
+            br.close();
+
+            txtSlovnik.setText(slova2);
+
+            SlovnikDao dao = new SlovnikDao(ctx);
+
+            dao.smazSlova();
+
+            String[] slova = txtSlovnik.getText().toString().split("\\n");
+
+            _vlozSlova(dao, slova);
+            dao.inicializaceKurzoruSlov();
+        }
+        catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        Toast.makeText(ctx, "Import slov z SD karty se zdařil.", Toast.LENGTH_SHORT).show();
     }
 }
