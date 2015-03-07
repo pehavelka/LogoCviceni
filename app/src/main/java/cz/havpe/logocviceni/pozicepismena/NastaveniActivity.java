@@ -72,6 +72,8 @@ public class NastaveniActivity extends Activity {
                                             }
 
         );
+
+        btnSlovnkSDkarta.requestFocus();
     }
 
     public void btnVytvoreniSlovnikuClicked(View obj) {
