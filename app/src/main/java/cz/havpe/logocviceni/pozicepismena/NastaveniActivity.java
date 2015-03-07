@@ -108,11 +108,11 @@ public class NastaveniActivity extends Activity {
         editor.commit();
 
         SlovnikDao.poradiSlova = 0; //začnu vždy od začátku
-        PozicePismena.pouzitaSlova = new HashSet<>();
+        PozicePismenaActivity.pouzitaSlova = new HashSet<>();
     }
 
     public void btnZacitNoveZkouseniClicked(View obj) {
-        PozicePismena.pouzitaSlova = new HashSet<>();
+        PozicePismenaActivity.pouzitaSlova = new HashSet<>();
         SlovnikDao.poradiSlova = 0;
 
         Toast.makeText(ctx, "Je možné začít nové zkoušení slov.", Toast.LENGTH_SHORT).show();

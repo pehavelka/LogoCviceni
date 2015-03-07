@@ -18,7 +18,7 @@
         </activity>
 
         <activity
-            android:name=".pozicepismena.PozicePismena" >
+            android:name=".pozicepismena.PozicePismenaActivity" >
         </activity>
 
         <activity

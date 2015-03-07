@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.WindowManager;
 
 import cz.havpe.logocviceni.pozicepismena.NastaveniActivity;
-import cz.havpe.logocviceni.pozicepismena.PozicePismena;
+import cz.havpe.logocviceni.pozicepismena.PozicePismenaActivity;
 
 
 public class MainActivity extends Activity {
@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     }
 
     public void btnPozicePismenaClicked(View obj) {
-        Intent intent = new Intent(this, PozicePismena.class);
+        Intent intent = new Intent(this, PozicePismenaActivity.class);
         startActivity(intent);
     }
 

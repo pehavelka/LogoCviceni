@@ -99,7 +99,7 @@ public class SlovnikDao {
 
         if (poradiSlova > pocetSlov) {
             poradiSlova = 0;
-            PozicePismena.pouzitaSlova = new HashSet<>();
+            PozicePismenaActivity.pouzitaSlova = new HashSet<>();
         }
         return slovo;
     }
@@ -146,6 +146,6 @@ public class SlovnikDao {
         curSlova= db.query("slova", columns, null, null, null, null, null);
 
         poradiSlova = 0;
-        PozicePismena.pouzitaSlova = new HashSet<>();
+        PozicePismenaActivity.pouzitaSlova = new HashSet<>();
     }
 }

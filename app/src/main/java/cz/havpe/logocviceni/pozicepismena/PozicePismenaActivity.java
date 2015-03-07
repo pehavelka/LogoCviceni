@@ -22,7 +22,7 @@ import java.util.Set;
 import cz.havpe.logocviceni.R;
 
 
-public class PozicePismena extends Activity {
+public class PozicePismenaActivity extends Activity {
 
     MediaPlayer player = new MediaPlayer();
     final int POCET_POKUSU = 1000;
@@ -51,7 +51,7 @@ public class PozicePismena extends Activity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.pozice_pismena);
+        setContentView(R.layout.activity_pozice_pismena);
 
         sharedpreferences = getSharedPreferences(NastaveniActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
 
