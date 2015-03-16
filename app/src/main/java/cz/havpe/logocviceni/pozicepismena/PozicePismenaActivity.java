@@ -53,7 +53,7 @@ public class PozicePismenaActivity extends Activity {
 
         setContentView(R.layout.activity_pozice_pismena);
 
-        sharedpreferences = getSharedPreferences(NastaveniActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
+        sharedpreferences = getSharedPreferences(PoziceNastaveniActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
 
         imgAno = (ImageView) findViewById(R.id.imgOdpovedAno);
         imgNe = (ImageView) findViewById(R.id.imgOdpovedNe);
@@ -82,9 +82,9 @@ public class PozicePismenaActivity extends Activity {
 
         pocetObrazku = mapObrazekAno.size();
 
-        if (sharedpreferences.contains(NastaveniActivity.ZKOUSENE_PISMENO_KEY))
+        if (sharedpreferences.contains(PoziceNastaveniActivity.ZKOUSENE_PISMENO_KEY))
         {
-            txtZkousenePismeno.setText(sharedpreferences.getString(NastaveniActivity.ZKOUSENE_PISMENO_KEY, null));
+            txtZkousenePismeno.setText(sharedpreferences.getString(PoziceNastaveniActivity.ZKOUSENE_PISMENO_KEY, null));
         }
 
         btnJine.requestFocus();
@@ -109,7 +109,7 @@ public class PozicePismenaActivity extends Activity {
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
 
         SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.putString(NastaveniActivity.ZKOUSENE_PISMENO_KEY, zkousenePismeno);
+        editor.putString(PoziceNastaveniActivity.ZKOUSENE_PISMENO_KEY, zkousenePismeno);
         editor.commit();
 
         if (zkousenePismeno.length() == 0) {
@@ -125,9 +125,9 @@ public class PozicePismenaActivity extends Activity {
         SlovnikDao dao = new SlovnikDao(this);
         String nahodneSlovo;
 
-        if (sharedpreferences.contains(NastaveniActivity.GENEROVAT_NAHODNE_KEY))
+        if (sharedpreferences.contains(PoziceNastaveniActivity.GENEROVAT_NAHODNE_KEY))
         {
-            generovatNahodne = sharedpreferences.getBoolean(NastaveniActivity.GENEROVAT_NAHODNE_KEY, false);
+            generovatNahodne = sharedpreferences.getBoolean(PoziceNastaveniActivity.GENEROVAT_NAHODNE_KEY, false);
         }
 
         do {

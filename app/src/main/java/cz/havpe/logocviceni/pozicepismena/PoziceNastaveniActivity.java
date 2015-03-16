@@ -22,7 +22,7 @@ import java.util.HashSet;
 import cz.havpe.logocviceni.R;
 
 
-public class NastaveniActivity extends Activity {
+public class PoziceNastaveniActivity extends Activity {
 
     EditText txtSlovnik;
 

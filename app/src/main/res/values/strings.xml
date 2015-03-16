@@ -11,5 +11,7 @@
     <string name="btn_nastaveni">Určení písmena - nastavení</string>
     <string name="text_zkousene">Zkoušené písmeno:</string>
 
+    <string name="btn_slabiky_nastaveni">Zkoušení slabik - nastavení</string>
+
 
 </resources>

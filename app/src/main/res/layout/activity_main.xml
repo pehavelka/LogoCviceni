@@ -22,4 +22,10 @@
         android:layout_height="wrap_content"
         android:onClick="btnPozicePismenaNastaveniClicked"/>
 
+    <Button android:id="@+id/btnSlabikyNastaveni"
+        android:text="@string/btn_slabiky_nastaveni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="btnPozicePismenaNastaveniClicked"/>
+
 </LinearLayout>

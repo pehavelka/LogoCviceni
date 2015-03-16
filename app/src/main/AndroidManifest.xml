@@ -19,17 +19,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".pozicepismena.PozicePismenaActivity" >
+        <activity android:name=".pozicepismena.PozicePismenaActivity" >
         </activity>
-
-        <activity
-            android:name=".pozicepismena.NastaveniActivity" >
+        <activity android:name=".pozicepismena.PoziceNastaveniActivity" >
         </activity>
-
-
+        <activity android:name=".pozicepismena.SlabikyNastaveniActivity" >
+        </activity>
     </application>
-
 
 </manifest>
