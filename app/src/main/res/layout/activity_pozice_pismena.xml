@@ -95,13 +95,13 @@
                 android:autoLink="all" />
 
             <Button android:id="@+id/btnJine"
-                android:text="@string/btn_jine"
+                android:text="@string/btn_pozice_jine"
                 android:onClick="btnJineClicked"
                 android:focusableInTouchMode="true"/>
 
             <Space android:minWidth="20dp" />
 
-            <TextView android:text="@string/text_zkousene"
+            <TextView android:text="@string/text_pozice_zkousene"
                 android:textSize="17dp" />
 
             <Space android:minWidth="5dp" />

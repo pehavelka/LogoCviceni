@@ -1,13 +1,6 @@
 package cz.havpe.logocviceni.pozicepismena;
 
-import android.content.Context;
 import android.widget.TextView;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,10 +23,11 @@ public class Utils {
 
     public static int randInt(int min, int max) {
         Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
+        @SuppressWarnings("UnnecessaryLocalVariable") int randomNum = rand.nextInt((max - min) + 1) + min;
         return randomNum;
     }
 
+    /*
     static public String readStringFromResource(Context ctx, int resourceID) {
         StringBuilder contents = new StringBuilder();
         String sep = System.getProperty("line.separator");
@@ -62,6 +56,6 @@ public class Utils {
 
         return contents.toString();
     }
-
+*/
 
 }

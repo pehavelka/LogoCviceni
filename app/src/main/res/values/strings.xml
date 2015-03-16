@@ -4,14 +4,14 @@
     <string name="app_name">LogoCviceni</string>
     <string name="action_settings">Settings</string>
 
-    <string name="tlacitko_pismeno">Určení písmena</string>
+    <string name="btn_pozice_urceni">Určení písmena</string>
+    <string name="btn_pozice_nastaveni">Určení písmena - nastavení</string>
+    <string name="btn_pozice_jine">Ze slovníku</string>
 
-    <string name="btn_jine">Ze slovníku</string>
-    <string name="btn_vyslovit">Vyslovit</string>
-    <string name="btn_nastaveni">Určení písmena - nastavení</string>
-    <string name="text_zkousene">Zkoušené písmeno:</string>
+    <string name="text_pozice_zkousene">Zkoušené písmeno:</string>
 
-    <string name="btn_slabiky_nastaveni">Zkoušení slabik - nastavení</string>
+    <string name="btn_slabiky_nastaveni">Určení slabiky - nastavení</string>
+    <string name="btn_slabiky_zkouseni">Určení slabiky</string>
 
 
 </resources>
