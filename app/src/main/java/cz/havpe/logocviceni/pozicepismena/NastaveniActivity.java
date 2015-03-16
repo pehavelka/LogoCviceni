@@ -44,7 +44,7 @@ public class NastaveniActivity extends Activity {
         //Remove notification bar
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_nastaveni);
+        setContentView(R.layout.activity_pozice_nastaveni);
 
         //příprava keše slovníku
         SlovnikDao dao = new SlovnikDao(ctx);
