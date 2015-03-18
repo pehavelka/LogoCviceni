@@ -79,7 +79,93 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/tblVyber">
+
+        <TableRow android:layout_width="fill_parent">
+            <Space android:minWidth="5dp" />
+
+            <ImageView android:id="@+id/imgVysledek10"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spatne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek9"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek8"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek7"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek6"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek5"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek4"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek3"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek2"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+
+            <Space android:minWidth="10dp" />
+
+            <ImageView android:id="@+id/imgVysledek1"
+                android:visibility="invisible"
+                android:src="@drawable/odpoved_spravne"
+                android:layout_height="50dp" android:layout_width="50dp" />
+            <Space android:minWidth="10dp" />
+        </TableRow>
+
+    </TableLayout>
+
+    <TableLayout android:id="@+id/tblVyber"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
+
+
+        <TableRow android:layout_span="8">
+            <Space android:minHeight="10dp" />
+        </TableRow>
+
 
         <TableRow
             android:layout_height="wrap_content"
@@ -115,8 +201,8 @@
 
         </TableRow>
 
-        <TableRow>
-            <Space android:layout_span="6"
+        <TableRow android:layout_span="8">
+            <Space
                 android:minHeight="20dp" />
         </TableRow>
     </TableLayout>
