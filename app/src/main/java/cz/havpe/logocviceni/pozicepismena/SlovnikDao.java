@@ -13,7 +13,7 @@ public class SlovnikDao {
 
 
     public static Cursor curSlova = null;
-    public static Integer pocetSlov = null;
+    public static Integer pocetSlovSlovnik = null;
     public static Integer poradiSlova = 0;
 
     protected static final String DATABASE_NAME = "slovnik";
@@ -68,7 +68,7 @@ public class SlovnikDao {
         String slovo = "";
         Integer pocet = 1;
 
-        Integer nahoda = Utils.randInt(1, pocetSlov);
+        Integer nahoda = Utils.randInt(1, pocetSlovSlovnik);
 
         curSlova.moveToFirst();
 
@@ -97,7 +97,7 @@ public class SlovnikDao {
 
         poradiSlova++;
 
-        if (poradiSlova > pocetSlov) {
+        if (poradiSlova > pocetSlovSlovnik) {
             poradiSlova = 0;
             PozicePismenaActivity.pouzitaSlova = new HashSet<>();
         }
@@ -139,7 +139,7 @@ public class SlovnikDao {
         columns = new String[]{"count(*)"};
         cur = db.query("slova", columns, null, null, null, null, null);
         cur.moveToNext();
-        pocetSlov = cur.getInt(0);
+        pocetSlovSlovnik = cur.getInt(0);
 
         //načtení slova
         columns = new String[]{"slovo"};

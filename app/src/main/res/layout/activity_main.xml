@@ -2,12 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:columnCount="2"
-    android:rowCount="2"
+    android:columnCount="3"
+    android:rowCount="4"
     android:orientation="horizontal"
     tools:context=".GridXMLActivity"
     android:background="#fffff1a4">
 
+    <!-- řádek 1 -->
+    <Space android:minWidth="20dp" />
+    <Space android:minHeight="60dp" />
+    <Space android:minHeight="60dp" />
+
+    <!-- řádek 2 -->
+    <Space android:minWidth="20dp" />
     <Button android:text="@string/btn_pozice_urceni"
         android:layout_width="450px"
         android:layout_height="wrap_content"
@@ -20,6 +27,13 @@
         android:onClick="btnPozicePismenaNastaveniClicked"
         />
 
+    <!-- řádek 3 -->
+    <Space android:minWidth="20dp" />
+    <Space android:minHeight="60dp" />
+    <Space android:minHeight="60dp" />
+
+    <!-- řádek 4 -->
+    <Space android:minWidth="20dp" />
     <Button android:id="@+id/btnSlabikyZkouseni"
         android:text="@string/btn_slabiky_zkouseni"
         android:layout_width="450px"

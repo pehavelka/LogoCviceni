@@ -86,7 +86,7 @@
 
             <ImageView android:id="@+id/imgVysledek10"
                 android:visibility="invisible"
-                android:src="@drawable/odpoved_spatne"
+                android:src="@drawable/odpoved_spravne"
                 android:layout_height="50dp" android:layout_width="50dp" />
 
             <Space android:minWidth="10dp" />

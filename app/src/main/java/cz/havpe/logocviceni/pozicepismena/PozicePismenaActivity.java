@@ -36,6 +36,17 @@ public class PozicePismenaActivity extends Activity {
     ImageView imgKonec;
     ImageView imgStred;
 
+    ImageView imgVysledek1;
+    ImageView imgVysledek2;
+    ImageView imgVysledek3;
+    ImageView imgVysledek4;
+    ImageView imgVysledek5;
+    ImageView imgVysledek6;
+    ImageView imgVysledek7;
+    ImageView imgVysledek8;
+    ImageView imgVysledek9;
+    ImageView imgVysledek10;
+
     SharedPreferences sharedpreferences;
 
     public static Set<String> pouzitaSlova = new HashSet<>();
@@ -53,7 +64,6 @@ public class PozicePismenaActivity extends Activity {
 
         setContentView(R.layout.activity_pozice_pismena);
 
-        sharedpreferences = getSharedPreferences(PoziceNastaveniActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
 
         imgAno = (ImageView) findViewById(R.id.imgOdpovedAno);
         imgNe = (ImageView) findViewById(R.id.imgOdpovedNe);
@@ -63,6 +73,17 @@ public class PozicePismenaActivity extends Activity {
         imgZacatek = (ImageView) findViewById(R.id.imgZacatek);
         imgKonec = (ImageView) findViewById(R.id.imgKonec);
         imgStred = (ImageView) findViewById(R.id.imgStred);
+
+        imgVysledek1 = (ImageView) findViewById(R.id.imgVysledek1);
+        imgVysledek2 = (ImageView) findViewById(R.id.imgVysledek2);
+        imgVysledek3 = (ImageView) findViewById(R.id.imgVysledek3);
+        imgVysledek4 = (ImageView) findViewById(R.id.imgVysledek4);
+        imgVysledek5 = (ImageView) findViewById(R.id.imgVysledek5);
+        imgVysledek6 = (ImageView) findViewById(R.id.imgVysledek6);
+        imgVysledek7 = (ImageView) findViewById(R.id.imgVysledek7);
+        imgVysledek8 = (ImageView) findViewById(R.id.imgVysledek8);
+        imgVysledek9 = (ImageView) findViewById(R.id.imgVysledek9);
+        imgVysledek10 = (ImageView) findViewById(R.id.imgVysledek10);
 
         SlovnikDao dao = new SlovnikDao(this);
         dao.inicializaceKurzoruSlov();
@@ -82,12 +103,18 @@ public class PozicePismenaActivity extends Activity {
 
         pocetObrazku = mapObrazekAno.size();
 
+        //obnovení zkoušeného písmene
+        sharedpreferences = getSharedPreferences(PoziceNastaveniActivity.MY_PREFERENCES, Context.MODE_PRIVATE);
         if (sharedpreferences.contains(PoziceNastaveniActivity.ZKOUSENE_PISMENO_KEY))
         {
             txtZkousenePismeno.setText(sharedpreferences.getString(PoziceNastaveniActivity.ZKOUSENE_PISMENO_KEY, null));
         }
 
         btnJine.requestFocus();
+
+        if (pouzitaSlova.size() == 0) {
+            _incicializaceOdpovedi();
+        }
     }
 
     public void imgZacatekClicked(View obj) {
@@ -105,6 +132,12 @@ public class PozicePismenaActivity extends Activity {
     public void btnJineClicked(View obj) {
 
         _schovejOdpovedi();
+
+        if (pouzitaSlova.size() == 3) {
+            _incicializaceOdpovedi();
+            SlovnikDao dao = new SlovnikDao(this);
+            dao.inicializaceKurzoruSlov();
+        }
 
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
 
@@ -172,16 +205,17 @@ public class PozicePismenaActivity extends Activity {
 
         } while(hledat);
 
-        pouzitaSlova.add(nahodneSlovo);
-        txtHadaneSlovo.setText(nahodneSlovo);
-        _nastavMoznostKlikani(true);
+        if (nahodneSlovo.trim().length() > 0) {
+            pouzitaSlova.add(nahodneSlovo);
+            txtHadaneSlovo.setText(nahodneSlovo);
+            _nastavMoznostKlikani(true);
+        }
         dao.close();
+        btnJine.setClickable(false);
     }
 
     private void _vyhodnotSlovo(VyskytPismena aVyskytPismena) {
-        _schovejOdpovedi();
-
-
+        _nastavMoznostKlikani(false);
 
         String zkousenePismeno = txtZkousenePismeno.getText().toString();
         if (zkousenePismeno.trim().length() ==0) {
@@ -232,25 +266,24 @@ public class PozicePismenaActivity extends Activity {
 
         Integer nahodaObrazek = Utils.randInt(1, pocetObrazku);
 
-        _nastavMoznostKlikani(false);
-
         if (player.isPlaying()) {
             player.stop();
             player.release();
         }
 
         if (nalezenaPozice.equals(aVyskytPismena)) {
+            _nastavOdpoved(OdpovedAnoNe.ANO);
             player = MediaPlayer.create(this,  R.raw.zvuk_spravne);
             player.start();
             imgAno.setVisibility(View.VISIBLE);
 
             imgAno.setImageResource(mapObrazekAno.get(nahodaObrazek));
-            //imgAno.setImageResource(ctx.getResources().getIdentifier("drawable/odpoved_ano" + nah + ".png", null, ctx.getPackageName()));
+
         } else {
+            _nastavOdpoved(OdpovedAnoNe.NE);
             player = MediaPlayer.create(this,  R.raw.zvuk_spatne);
             player.start();
             imgNe.setVisibility(View.VISIBLE);
-
             imgNe.setImageResource(mapObrazekNe.get(nahodaObrazek));
         }
 
@@ -261,8 +294,11 @@ public class PozicePismenaActivity extends Activity {
             public void onCompletion(MediaPlayer mp)
             {
                 txtHadaneSlovo.setText("");
+                btnJine.setClickable(true);
             }
         });
+
+
     }
 
     private void _schovejOdpovedi() {
@@ -276,4 +312,101 @@ public class PozicePismenaActivity extends Activity {
         imgStred.setClickable(aKlikat);
     }
 
+    private void _incicializaceOdpovedi(){
+        imgVysledek1.setVisibility(View.INVISIBLE);
+        imgVysledek2.setVisibility(View.INVISIBLE);
+        imgVysledek3.setVisibility(View.INVISIBLE);
+        imgVysledek4.setVisibility(View.INVISIBLE);
+        imgVysledek5.setVisibility(View.INVISIBLE);
+        imgVysledek6.setVisibility(View.INVISIBLE);
+        imgVysledek7.setVisibility(View.INVISIBLE);
+        imgVysledek8.setVisibility(View.INVISIBLE);
+        imgVysledek9.setVisibility(View.INVISIBLE);
+        imgVysledek10.setVisibility(View.INVISIBLE);
+    }
+
+    private void _nastavOdpoved(OdpovedAnoNe aOdpovedAno) {
+        switch (pouzitaSlova.size()) {
+            case 1:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek1.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek1.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek1.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek2.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek2.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek2.setVisibility(View.VISIBLE);
+                break;
+            case 3:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek3.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek3.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek3.setVisibility(View.VISIBLE);
+                break;
+            case 4:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek4.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek4.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek4.setVisibility(View.VISIBLE);
+                break;
+            case 5:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek5.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek5.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek5.setVisibility(View.VISIBLE);
+                break;
+            case 6:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek6.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek6.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek6.setVisibility(View.VISIBLE);
+                break;
+            case 7:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek7.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek7.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek7.setVisibility(View.VISIBLE);
+                break;
+            case 8:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek8.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek8.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek8.setVisibility(View.VISIBLE);
+                break;
+            case 9:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek9.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek9.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek9.setVisibility(View.VISIBLE);
+                break;
+            case 10:
+                if (aOdpovedAno.equals(OdpovedAnoNe.ANO)) {
+                    imgVysledek10.setImageResource(R.drawable.odpoved_spravne);
+                } else {
+                    imgVysledek10.setImageResource(R.drawable.odpoved_spatne);
+                }
+                imgVysledek10.setVisibility(View.VISIBLE);
+                break;
+        }
+    }
 }
