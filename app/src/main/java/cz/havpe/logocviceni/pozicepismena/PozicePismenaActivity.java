@@ -133,7 +133,7 @@ public class PozicePismenaActivity extends Activity {
 
         _schovejOdpovedi();
 
-        if (pouzitaSlova.size() == 3) {
+        if (pouzitaSlova.size() == 10) {
             _incicializaceOdpovedi();
             SlovnikDao dao = new SlovnikDao(this);
             dao.inicializaceKurzoruSlov();
